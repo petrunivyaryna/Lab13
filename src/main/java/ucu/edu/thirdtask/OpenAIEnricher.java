@@ -11,6 +11,8 @@ import java.net.URI;
 import java.net.URL;
 
 public class OpenAIEnricher {
+    private static final int DEFAULT_IND = 11;
+
     @SneakyThrows
     public static String extract(String prompt) {
         String myUrl = "https://api.openai.com/v1/chat/completions";
@@ -25,8 +27,9 @@ public class OpenAIEnricher {
             connection.setRequestProperty("Authorization", "Bearer " + apiKey);
             connection.setRequestProperty("Content-Type", "application/json");
 
-            String body = "{\"model\": \"" + model +
-        "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+            String body = "{\"model\": \"" + model 
+                + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" 
+                + prompt + "\"}]}";
 
             connection.setDoOutput(true);
             OutputStreamWriter writer = new OutputStreamWriter(
@@ -54,7 +57,7 @@ public class OpenAIEnricher {
     }
 
     public static String extractMessageFromJSONResponse(String response) {
-        int start = response.indexOf("content")+ 11;
+        int start = response.indexOf("content")+ DEFAULT_IND;
 
         int end = response.indexOf("\"", start);
 
