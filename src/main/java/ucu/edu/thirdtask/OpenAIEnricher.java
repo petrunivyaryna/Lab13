@@ -19,19 +19,24 @@ public class OpenAIEnricher {
 
         try {
             URL obj = new URI(myUrl).toURL();
-            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+            HttpURLConnection connection = 
+                        (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", "Bearer " + apiKey);
             connection.setRequestProperty("Content-Type", "application/json");
 
-            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+            String body = "{\"model\": \"" + model +
+        "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+
             connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            OutputStreamWriter writer = new OutputStreamWriter(
+                    connection.getOutputStream());
             writer.write(body);
             writer.flush();
             writer.close();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
             String line;
 
             StringBuffer response = new StringBuffer();
