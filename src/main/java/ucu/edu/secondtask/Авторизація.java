@@ -1,4 +1,4 @@
-package ucu.edu;
+package ucu.edu.secondtask;
 
 public class Авторизація {
     public boolean авторизуватися(БазаДаних db) {
